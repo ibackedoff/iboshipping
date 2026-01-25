@@ -3,70 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IBOShipping | Indian Proxy & Package Forwarding</title>
+    <title>IBOShipping | Indian Proxy & Forwarding</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background: #f4f7f6; }
-        header { text-align: center; padding: 40px 0; background: #2c3e50; color: white; border-radius: 8px; margin-bottom: 30px; }
-        .card { background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        .fee-list { list-style: none; padding: 0; }
-        .fee-list li { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
-        .cta-container { text-align: center; margin-top: 40px; }
-        .btn { display: inline-block; padding: 15px 30px; margin: 10px; border-radius: 5px; text-decoration: none; font-weight: bold; transition: 0.3s; }
-        .whatsapp { background: #25D366; color: white; }
-        .form { background: #3498db; color: white; }
-        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
-        .warning { color: #e67e22; font-weight: bold; }
-        .footer { text-align: center; font-size: 0.9em; color: #7f8c8d; margin-top: 50px; }
+        :root {
+            --bg: #0f172a; --card-bg: #1e293b; --text: #f8fafc;
+            --accent: #38bdf8; --nav-bg: rgba(15, 23, 42, 0.8);
+        }
+        .light-mode {
+            --bg: #f8fafc; --card-bg: #ffffff; --text: #1e293b;
+            --accent: #0284c7; --nav-bg: rgba(248, 250, 252, 0.8);
+        }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        body { 
+            margin: 0; font-family: 'Inter', system-ui, sans-serif; 
+            background-color: var(--bg); color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); backdrop-filter: blur(10px);
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-links a { 
+            color: var(--text); text-decoration: none; margin-left: 20px; 
+            font-weight: 500; cursor: pointer;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* Dark Mode Toggle */
+        #theme-toggle {
+            background: none; border: 1px solid var(--text); color: var(--text);
+            padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 0.8rem;
+        }
+
+        /* Hero Section */
+        .section { padding: 100px 20px; max-width: 900px; margin: 0 auto; display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s ease; }
+        
+        .hero { text-align: center; padding-top: 150px; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; color: var(--accent); }
+        
+        /* Interactive Cards */
+        .card { 
+            background: var(--card-bg); padding: 2rem; border-radius: 16px; 
+            margin-top: 20px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        /* Buttons */
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+        .btn { 
+            padding: 12px 28px; border-radius: 8px; text-decoration: none; 
+            font-weight: 600; display: inline-block; text-align: center;
+        }
+        .primary { background: var(--accent); color: #0f172a; }
+        .secondary { border: 1px solid var(--accent); color: var(--accent); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 600px) { .hero h1 { font-size: 2.5rem; } .nav-links { display: none; } }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>IBOShipping</h1>
-    <p>Premium Indian Proxy Shipping & Worldwide Package Forwarding</p>
-</header>
+<nav>
+    <div style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">IBOShipping</div>
+    <div class="nav-links">
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('shipping')">Shipping</a>
+        <a onclick="showPage('pricing')">Pricing</a>
+        <button id="theme-toggle">🌓 Toggle Theme</button>
+    </div>
+</nav>
 
-<div class="card">
-    <h2>Two Ways to Shop</h2>
-    <p><strong>1. Concierge (I Buy For You):</strong> Best if you don't have an Indian card or want to avoid forex fees. Send me the links, and I handle the rest.</p>
-    <p><strong>2. Self-Checkout (Forwarding):</strong> Buy from any site using my Indian address. I'll notify you as each package arrives.</p>
+<div id="home" class="section active hero">
+    <h1>Ship from India.</h1>
+    <p style="font-size: 1.2rem; opacity: 0.8;">Your personal proxy shopper and worldwide package forwarder.</p>
+    <div class="btn-group">
+        <a href="https://wa.me/YOUR_NUMBER" class="btn primary">Chat on WhatsApp</a>
+        <a onclick="showPage('shipping')" class="btn secondary">View Services</a>
+    </div>
 </div>
 
-<div class="card">
-    <h2>Shipping Methods</h2>
-    <ul>
-        <li><strong>Speed Post (Highly Recommended):</strong> My default choice. 7-14 days delivery, reliable tracking, and consistent service.</li>
-        <li><strong>Private Courier (DPD, etc.):</strong> Premium service. Faster transit and optional <strong>Insurance coverage</strong> (chargeable). Best for high-value items.</li>
-        <li><strong>Normal Post:</strong> Budget option. 3-4 weeks+. <span class="warning">Note: Can be unreliable and slow.</span></li>
-    </ul>
+<div id="shipping" class="section">
+    <h2>Shipping Solutions</h2>
+    <div class="card">
+        <h3>🚀 Speed Post</h3>
+        <p>My default choice for a reason. Reliable tracking and leaves India within 3-4 days. Usually delivered in 7-14 days.</p>
+    </div>
+    <div class="card">
+        <h3>📦 Private Courier (DPD/Others)</h3>
+        <p>Premium options with flexible insurance. Recommended for high-value items where speed and safety are top priorities.</p>
+    </div>
+    <div class="card">
+        <h3>🐢 Normal Post</h3>
+        <p style="opacity: 0.7;">Cheap but unreliable. Takes 3-4 weeks and tracking can be inconsistent. Choose with caution.</p>
+    </div>
 </div>
 
-<div class="card">
-    <h2>Transparent Pricing</h2>
-    <ul class="fee-list">
-        <li><span>Service Fee (on Total Cost)</span> <strong>15% (Min. ₹500)</strong></li>
-        <li><span>Logistics & Handling</span> <strong>₹400</strong></li>
-        <li><span>Standard Minimal Packing</span> <strong>₹300</strong></li>
-        <li><span>Custom/Bubble Wrap/Double Box</span> <strong>Quote on Request</strong></li>
-    </ul>
-    <p><small>*Total Cost = Product + Shipping + Packing + Logistics.</small></p>
+<div id="pricing" class="section">
+    <h2>Pricing Structure</h2>
+    <div class="card">
+        <h3 style="color: var(--accent);">15% All-In Management Fee</h3>
+        <p>Calculated on the total cost (Items + Shipping + Logistics + Packing).</p>
+        <hr style="opacity: 0.1;">
+        <p>• Logistics & Handling: <strong>₹400</strong></p>
+        <p>• Minimal Standard Packing: <strong>₹300</strong></p>
+        <p>• Minimum Service Fee: <strong>₹500</strong></p>
+    </div>
+    <div class="card">
+        <h3>Custom Packaging</h3>
+        <p>Need extra bubble wrap, double boxing, or specialized protection? Custom quotes available based on your items.</p>
+    </div>
 </div>
 
-<div class="card">
-    <h2>Customs & Support</h2>
-    <p>I provide <strong>Customs Strategy & Declaration Support</strong> for every shipment. We can consult on the best way to declare your items to ensure a smooth delivery. Contact me directly for personalized advice based on your country.</p>
-</div>
+<script>
+    function showPage(pageId) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0,0);
+    }
 
-<div class="cta-container">
-    <a href="https://wa.me/YOUR_NUMBER" class="btn whatsapp">Message on WhatsApp</a>
-    <a href="YOUR_GOOGLE_FORM_LINK" class="btn form">Fill Order Form</a>
-</div>
-
-<div class="footer">
-    <p>Verified Reddit Shipper: <strong>iBackedoff</strong></p>
-    <p>© 2026 IBOShipping. All Rights Reserved.</p>
-</div>
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+    });
+</script>
 
 </body>
 </html>
