@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | IBOShipping</title>
+    <style>
+        :root { --bg: #070b14; --card: #1e293b; --accent: #38bdf8; --text: #f8fafc; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); display: flex; justify-content: center; padding: 40px 20px; }
+        .auth-container { text-align: center; margin-top: 100px; }
+        input[type="password"], input[type="number"] { background: #0f172a; border: 1px solid #334155; color: white; padding: 12px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+        .hidden { display: none; }
+        .admin-panel { max-width: 600px; width: 100%; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { flex: 1; padding: 12px; background: #1e293b; border-radius: 8px; cursor: pointer; text-align: center; border: 1px solid transparent; }
+        .tab.active { border-color: var(--accent); background: #334155; }
+        .card { background: var(--card); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); }
+        label { display: block; margin-top: 15px; font-size: 0.8rem; opacity: 0.7; }
+        .output-area { background: #000; padding: 20px; border-radius: 12px; margin-top: 25px; border: 1px solid var(--accent); white-space: pre-wrap; font-family: monospace; font-size: 0.85rem; }
+        .copy-btn { width: 100%; background: var(--accent); color: #070b14; padding: 15px; border: none; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div id="auth" class="auth-container">
+    <h1>Restricted Access</h1>
+    <input type="password" id="passInput" placeholder="Enter Password">
+    <button class="copy-btn" onclick="checkPass()">Unlock Dashboard</button>
+</div>
+
+<div id="panel" class="admin-panel hidden">
+    <div class="tabs">
+        <div id="tabEst" class="tab active" onclick="switchTab('estimate')">Estimate Mode</div>
+        <div id="tabFinal" class="tab" onclick="switchTab('final')">Final Invoice</div>
+    </div>
+
+    <div class="card">
+        <div id="inputs">
+            <label>Product Cost (INR)</label>
+            <input type="number" id="prod" oninput="calculate()">
+
+            <label>Shipping (INR)</label>
+            <input type="number" id="ship" oninput="calculate()">
+
+            <label>Packing (INR)</label>
+            <input type="number" id="pack" value="300" oninput="calculate()">
+
+            <label>Logistics (INR)</label>
+            <input type="number" id="log" value="400" oninput="calculate()">
+
+            <div id="finalOnly" class="hidden">
+                <label>Import Duty / Extra Fees (INR)</label>
+                <input type="number" id="duty" value="0" oninput="calculate()">
+                
+                <label>Gift Option Percentage (%)</label>
+                <input type="number" id="giftPerc" value="0" oninput="calculate()">
+
+                <label>Amount Already Paid (INR)</label>
+                <input type="number" id="paid" value="0" oninput="calculate()">
+            </div>
+        </div>
+
+        <div class="output-area" id="output">Quote will appear here...</div>
+        <button class="copy-btn" onclick="copyText()">Copy Message</button>
+    </div>
+</div>
+
+<script>
+    let mode = 'estimate';
+
+    function checkPass() {
+        if(document.getElementById('passInput').value === 'husher') {
+            document.getElementById('auth').classList.add('hidden');
+            document.getElementById('panel').classList.remove('hidden');
+        } else { alert('Wrong Password'); }
+    }
+
+    function switchTab(t) {
+        mode = t;
+        document.getElementById('tabEst').classList.toggle('active', t === 'estimate');
+        document.getElementById('tabFinal').classList.toggle('active', t === 'final');
+        document.getElementById('finalOnly').classList.toggle('hidden', t === 'estimate');
+        calculate();
+    }
+
+    function calculate() {
+        const p = parseFloat(document.getElementById('prod').value) || 0;
+        const s = parseFloat(document.getElementById('ship').value) || 0;
+        const pk = parseFloat(document.getElementById('pack').value) || 0;
+        const l = parseFloat(document.getElementById('log').value) || 0;
+        const d = parseFloat(document.getElementById('duty').value) || 0;
+        const gP = parseFloat(document.getElementById('giftPerc').value) || 0;
+        const paid = parseFloat(document.getElementById('paid').value) || 0;
+
+        const subtotal = p + s + pk + l + d;
+        
+        let commissionPerc = 15 + gP;
+        let commAmt = subtotal * (commissionPerc / 100);
+        
+        // Min 500 Rule
+        if (commAmt < 500 && subtotal > 0) commAmt = 500;
+
+        const grandTotal = subtotal + commAmt;
+        const pending = grandTotal - paid;
+
+        let msg = "";
+        if(mode === 'estimate') {
+            msg = `Here are the estimates for your shipment:\n\n` +
+                  `• Product Cost: ₹${p.toLocaleString()}\n` +
+                  `• Shipping (Est): ₹${s.toLocaleString()}\n` +
+                  `• Packing: ₹${pk.toLocaleString()}\n` +
+                  `• Logistics: ₹${l.toLocaleString()}\n\n` +
+                  `Subtotal: ₹${subtotal.toLocaleString()}\n` +
+                  `Service Fee (15%): ₹${Math.round(commAmt).toLocaleString()}\n\n` +
+                  `TOTAL ESTIMATE: ₹${Math.round(grandTotal).toLocaleString()}\n\n` +
+                  `(Final amount decided once items are packed!)`;
+        } else {
+            msg = `FINAL INVOICE BREAKDOWN:\n\n` +
+                  `• Product Total: ₹${p.toLocaleString()}\n` +
+                  `• Final Shipping: ₹${s.toLocaleString()}\n` +
+                  `• Duties/Fees: ₹${d.toLocaleString()}\n` +
+                  `• Packing & Logistics: ₹${(pk + l).toLocaleString()}\n\n` +
+                  `Subtotal: ₹${subtotal.toLocaleString()}\n` +
+                  `Service Fee (${commissionPerc}%): ₹${Math.round(commAmt).toLocaleString()}\n\n` +
+                  `GRAND TOTAL: ₹${Math.round(grandTotal).toLocaleString()}\n` +
+                  `----------------------------\n` +
+                  `Total Paid: ₹${paid.toLocaleString()}\n` +
+                  `REMAINING BALANCE: ₹${Math.round(pending).toLocaleString()}`;
+        }
+        document.getElementById('output').innerText = msg;
+    }
+
+    function copyText() {
+        navigator.clipboard.writeText(document.getElementById('output').innerText);
+        alert("Copied!");
+    }
+</script>
+</body>
+</html>
