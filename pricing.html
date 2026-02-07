@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing & Terms | IBOShipping 🇮🇳</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f1a; --card: #161b2c; --text: #f1f5f9;
+            --accent: #38bdf8; --nav-bg: rgba(11, 15, 26, 0.85);
+            --border: rgba(255, 255, 255, 0.08);
+            --danger: #ef4444;
+        }
+        .light-mode {
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a;
+            --accent: #0284c7; --nav-bg: rgba(248, 250, 252, 0.85);
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); padding-top: 100px; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* --- Navigation --- */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(15px); padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        .logo { font-weight: 800; font-size: 1.6rem; color: var(--accent); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 30px; }
+        .nav-links a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        #theme-toggle { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 15px; border-radius: 100px; cursor: pointer; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; flex: 1; }
+        .header-center { text-align: center; margin-bottom: 60px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .card { background: var(--card); padding: 40px; border-radius: 28px; border: 1px solid var(--border); position: relative; }
+        .price-hero { font-size: 3.5rem; font-weight: 800; color: var(--accent); margin: 10px 0; }
+        .badge { display: inline-block; padding: 6px 14px; border-radius: 50px; background: rgba(56, 189, 248, 0.1); color: var(--accent); font-size: 0.75rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
+
+        /* --- Terms Section --- */
+        .terms-section { margin-top: 80px; padding: 60px; background: var(--card); border-radius: 32px; border: 1px solid var(--border); }
+        .terms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .terms-item h4 { color: var(--accent); margin-bottom: 10px; font-size: 1.2rem; }
+        .terms-item p { opacity: 0.7; font-size: 0.95rem; line-height: 1.6; }
+
+        footer { text-align: center; padding: 60px 5%; border-top: 1px solid var(--border); margin-top: 80px; }
+
+        @media (max-width: 768px) { .terms-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">IBOShipping 🇮🇳</a>
+    <div class="nav-links">
+        <a href="how-it-works.html">🗺️ Journey</a>
+        <a href="gallery.html">📸 Gallery</a>
+        <a href="pricing.html" style="color: var(--accent);">💳 Pricing</a>
+        <a href="faq.html">❓ FAQ</a>
+        <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="header-center">
+        <div class="badge">Transparent Economics</div>
+        <h1 style="font-size: 3rem; margin: 0;">Simple Fees. No Secrets. 💳</h1>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="badge">Management</div>
+            <div class="price-hero">15%</div>
+            <p style="font-size: 1.1rem;">Our service fee is applied to the <b>total all-over cost</b> (Products + Shipping + Logistics + Packing). 🌎</p>
+            <p style="opacity: 0.6; font-size: 0.9rem;"><em>Minimum service fee of ₹500 per shipment applies.</em></p>
+        </div>
+
+        <div class="card">
+            <div class="badge">Fixed Handling</div>
+            <p>• <strong>Logistics & Dispatch:</strong> ₹400 <br>
+               • <strong>Standard Minimal Packing:</strong> ₹300</p>
+            <p style="opacity: 0.8;">We prioritize safety. Custom double-wrapping or specialized fragile packing is available and quoted based on your needs. 📦</p>
+        </div>
+    </div>
+
+    <div class="terms-section">
+        <h2 style="text-align: center; margin-bottom: 40px;">Shipping Terms & Disclaimers ⚖️</h2>
+        <div class="terms-grid">
+            <div class="terms-item">
+                <h4>Customs & Duties 🛂</h4>
+                <p>The recipient is the importer of record and must comply with all laws of the destination country. IBOShipping is not responsible for any customs restrictions, tariffs, or local taxes. These are the sole responsibility of the buyer.</p>
+            </div>
+            <div class="terms-item">
+                <h4>Service Liability 🛡️</h4>
+                <p>We act as your proxy agent to facilitate purchase and transport. Once a package is handed over to a third-party carrier (India Post, Private courriers, etc.), we are not liable for delays, losses, or damages caused by the carrier.</p>
+            </div>
+            <div class="terms-item">
+                <h4>Seizures & Rejections ✕</h4>
+                <p>If a package is seized or rejected by customs due to item restrictions in your country, we cannot issue a refund in any way, its your sole responsibility to check for restricted items which are prohibited in your country. (Please refer to FAQ for  most common restricted item types and categories.)</p>
+            </div>
+            <div class="terms-item">
+                <h4>Insurance Options 💎</h4>
+                <p>Standard carrier liability is limited. We would recommend purchasing insurance (if needed) for high-value items that is only available through private courier options.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div style="margin-bottom: 30px;">
+        <a href="how-it-works.html" style="color: inherit; margin: 0 15px; text-decoration: none;">Journey</a>
+        <a href="gallery.html" style="color: inherit; margin: 0 15px; text-decoration: none;">Gallery</a>
+        <a href="order.html" style="color: var(--accent); margin: 0 15px; text-decoration: none; font-weight: bold;">Order Now 🚀</a>
+    </div>
+    <p style="opacity: 0.4; font-size: 0.8rem;">IBOShipping © 2026 | From India to the World 🇮🇳🌎</p>
+</footer>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+</script>
+
+</body>
+</html>

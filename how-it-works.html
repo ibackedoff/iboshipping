@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Journey | IBOShipping 🗺️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f1a; --card: #161b2c; --text: #f1f5f9;
+            --accent: #38bdf8; --nav-bg: rgba(11, 15, 26, 0.85);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        .light-mode {
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a;
+            --accent: #0284c7; --nav-bg: rgba(248, 250, 252, 0.85);
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); padding-top: 100px; }
+        
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(15px); padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        .logo { font-weight: 800; font-size: 1.6rem; color: var(--accent); text-decoration: none; }
+        .nav-links a { color: var(--text); text-decoration: none; margin-left: 25px; font-weight: 600; font-size: 0.9rem; }
+        #theme-toggle { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 15px; border-radius: 100px; cursor: pointer; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        
+        .step-row { display: flex; gap: 80px; align-items: center; margin-bottom: 120px; }
+        .step-row:nth-child(even) { flex-direction: row-reverse; }
+        
+        .step-content { flex: 1; }
+        .step-number { font-size: 5rem; font-weight: 900; color: var(--accent); opacity: 0.1; line-height: 1; margin-bottom: -10px; }
+        .step-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); }
+        .step-text { font-size: 1.1rem; opacity: 0.8; line-height: 1.7; }
+        
+        .image-box { 
+    flex: 1; 
+    min-width: 350px; /* Prevents the box from getting too skinny */
+    height: 400px; 
+    border-radius: 32px; 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    overflow: hidden;
+    position: relative; /* Essential for absolute positioning of the image */
+    box-shadow: 0 30px 60px -12px rgba(0,0,0,0.4);
+}
+
+.image-box img { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* This forces the image to fill the box without squishing */
+    object-position: center; 
+}
+
+@media (max-width: 768px) {
+    .step-row, .step-row:nth-child(even) { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 40px; 
+    }
+    .image-box { 
+        width: 100%; 
+        min-width: 100%;
+        height: 280px; 
+    }
+}
+
+.image-box:hover img {
+    transform: scale(1.03); /* Subtle interactive zoom when a user hovers */
+}
+
+.highlight-box { 
+    background: rgba(56, 189, 248, 0.05); 
+    padding: 20px; 
+    border-radius: 16px; 
+    border-left: 4px solid var(--accent); 
+    margin-top: 25px; 
+    font-style: italic;
+    line-height: 1.6;
+}
+
+        footer { text-align: center; padding: 80px 5%; border-top: 1px solid var(--border); }
+
+        @media (max-width: 768px) {
+            .step-row, .step-row:nth-child(even) { flex-direction: column; text-align: center; gap: 40px; }
+            .image-box { width: 100%; height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">IBOShipping 🇮🇳</a>
+    <div class="nav-links">
+        <a href="how-it-works.html" style="color: var(--accent);">🗺️ Journey</a>
+        <a href="gallery.html">📸 Gallery</a>
+        <a href="pricing.html">💳 Pricing</a>
+        <a href="faq.html">❓ FAQ</a>
+        <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+</nav>
+
+<div class="container">
+    <div style="text-align: center; margin-bottom: 100px;">
+        <h1 style="font-size: 3.5rem; margin-bottom: 10px;">The Shipping Journey 🗺️</h1>
+        <p style="opacity: 0.7; font-size: 1.2rem;">Detailed. Personal. Seamless.</p>
+    </div>
+
+    <div class="step-row">
+        <div class="step-content">
+            <div class="step-number">01</div>
+            <h2 class="step-title">Easy Shopping Options 🛒</h2>
+            <p class="step-text">Pick what works best for you. You can let us handle the checkout or use our address yourself. It’s super simple!</p>
+            <div class="highlight-box">
+                <strong>Help with Buying:</strong> Send us links, we pay via local methods to avoid high forex fees. (Recommended)<br>
+                <strong>Buy Yourself:</strong> Shop anywhere and ship to our local 🇮🇳 address.
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="imgs/step1.jpg" alt="Sourcing Image">
+        </div>
+    </div>
+
+    <div class="step-row">
+        <div class="step-content">
+            <div class="step-number">02</div>
+            <h2 class="step-title">Arrival & Inspection 🛡️</h2>
+            <p class="step-text">We notify you the moment your items arrive with <strong>Free Photo Verification</strong>. We don't just receive; we inspect for color, size, and condition.</p>
+            <div class="highlight-box">
+                "Your wish is our command" — We can perform deep inspections on any specific detail you request. 🔎
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="imgs/step2.jpg" alt="Inspection Image">
+        </div>
+    </div>
+
+    <div class="step-row">
+        <div class="step-content">
+            <div class="step-number">03</div>
+            <h2 class="step-title">Consolidation Magic 📦</h2>
+            <p class="step-text">Shipping multiple boxes is costly. We combine your orders into one secure package to save you up to 60% on international courier fees.</p>
+            <div class="highlight-box">
+                If boxes are available, items are consolidated for free! Charges apply per box only if multiple packages are required.
+            </div>
+        </div>
+        <div class="image-box">
+            <img src="imgs/step3.jpg" alt="Packing Image">
+        </div>
+    </div>
+
+    <div class="step-row">
+        <div class="step-content">
+            <div class="step-number">04</div>
+            <h2 class="step-title">Worldwide Dispatch 🌎</h2>
+            <p class="step-text">Choose your Shipping method: Speed Post (Recommended), Private Courier, or Normal Post. We handle the package and paperwork and your package is on its way!</p>
+            <a href="order.html" class="step-title" style="font-size: 1.1rem; text-decoration: none; border-bottom: 2px solid var(--accent);">Ready to Start? Order Now →</a>
+        </div>
+        <div class="image-box">
+            <img src="imgs/step4.jpg" alt="Shipping Image">
+        </div>
+    </div>
+</div>
+
+<footer>
+    <span style="font-weight: 800; color: var(--accent); font-size: 1.2rem;">IBOShipping 🇮🇳</span>
+    <p style="opacity: 0.5; margin-top: 20px;">© 2026 | Verified Proxy Service for International Shoppers 🌎</p>
+</footer>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+</script>
+
+</body>
+</html>
