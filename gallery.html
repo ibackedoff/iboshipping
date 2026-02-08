@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Proof Hub | IBOShipping 📸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --bg: #0b0f1a; --card: #161b2c; --text: #f1f5f9;
+        --accent: #38bdf8; --nav-bg: rgba(11, 15, 26, 0.85);
+        --border: rgba(255, 255, 255, 0.08); --reddit: #FF4500;
+    }
+    .light-mode {
+        --bg: #f8fafc; --card: #ffffff; --text: #0f172a;
+        --accent: #0284c7; --nav-bg: rgba(248, 250, 252, 0.85);
+        --border: rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); padding-top: 100px; overflow-x: hidden; }
+    
+    /* --- Mobile-Friendly Navigation --- */
+    nav { 
+        position: fixed; top: 0; width: 100%; z-index: 1000; 
+        background: var(--nav-bg); backdrop-filter: blur(15px); 
+        padding: 1.2rem 5%; display: flex; justify-content: space-between; 
+        align-items: center; border-bottom: 1px solid var(--border); 
+    }
+    .logo { font-weight: 800; font-size: 1.6rem; color: var(--accent); text-decoration: none; }
+    
+    .nav-links { display: flex; align-items: center; gap: 15px; } 
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+    
+    #theme-toggle { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 15px; border-radius: 100px; cursor: pointer; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+    /* --- Slideshow Category Box --- */
+    .category-container { margin-bottom: 60px; }
+    .category-box { 
+        display: flex; gap: 30px; background: var(--card); border-radius: 32px; 
+        border: 1px solid var(--border); padding: 30px; align-items: center; cursor: pointer;
+    }
+    .category-box:hover { border-color: var(--accent); transform: translateY(-5px); }
+
+    .slideshow-window { 
+        width: 250px; height: 250px; border-radius: 20px; overflow: hidden; 
+        position: relative; flex-shrink: 0; border: 1px solid var(--border);
+    }
+    .slide { 
+        position: absolute; width: 100%; height: 100%; object-fit: cover;
+        opacity: 0; transition: opacity 1s ease-in-out;
+    }
+    .slide.active { opacity: 1; }
+
+    .category-info { flex: 1; }
+    .category-info h2 { margin: 0; font-size: 1.8rem; font-weight: 800; }
+    .category-info p { opacity: 0.6; margin: 10px 0 20px; font-size: 1rem; }
+    .view-indicator { font-size: 0.8rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* --- Full Grid --- */
+    .grid-hidden { 
+        max-height: 0; opacity: 0; overflow: hidden; 
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; 
+    }
+    .category-container.open .grid-hidden { max-height: 4000px; opacity: 1; margin-top: 30px; padding: 20px 0; border-top: 1px solid var(--border); }
+    .grid-item { width: 100%; aspect-ratio: 1/1; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .grid-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* --- Review Section --- */
+    .review-section { margin-top: 100px; padding: 60px 40px; background: var(--card); border-radius: 40px; border: 1px solid var(--border); }
+    .review-card { background: var(--bg); padding: 30px; border-radius: 20px; border-left: 4px solid var(--reddit); margin-top: 30px; }
+    .review-card p { font-style: italic; opacity: 0.8; line-height: 1.6; }
+    .user-meta { font-weight: 800; color: var(--accent); margin-bottom: 5px; display: block; }
+
+    footer { text-align: center; padding: 80px 5%; border-top: 1px solid var(--border); opacity: 0.5; }
+
+    /* --- Global Mobile Optimization --- */
+    @media (max-width: 768px) {
+        body { padding-top: 80px; }
+        
+        /* Header Fix */
+        nav { padding: 1rem 3%; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .logo { width: 100%; text-align: center; font-size: 1.3rem; margin-bottom: 5px; }
+        .nav-links { gap: 12px; justify-content: center; width: 100%; }
+        .nav-links a { font-size: 0.8rem; }
+
+        /* Gallery Card Fix */
+        .category-box { flex-direction: column; text-align: center; padding: 25px; gap: 20px; }
+        .slideshow-window { width: 100%; height: 280px; }
+        .category-info h2 { font-size: 1.5rem; }
+        
+        /* Grid Fix */
+        .grid-hidden { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        
+        /* Review Section Fix */
+        .review-section { padding: 40px 20px; }
+        .review-card { padding: 20px; }
+        
+        h1 { font-size: 2.2rem !important; }
+    }
+
+    @media (max-width: 480px) {
+        .grid-hidden { grid-template-columns: 1fr; }
+        .slideshow-window { height: 220px; }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">IBOShipping 🇮🇳</a>
+    <div class="nav-links">
+        <a href="how-it-works.html">🗺️ Journey</a>
+        <a href="gallery.html" style="color: var(--accent);">📸 Gallery</a>
+        <a href="pricing.html">💳 Pricing</a>
+        <a href="faq.html">❓ FAQ</a>
+        <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+</nav>
+
+<div class="container">
+    <div style="text-align: center; margin-bottom: 80px;">
+        <h1 style="font-size: 3.5rem; margin-bottom: 10px;">The Proof Hub 📸</h1>
+        <p style="opacity: 0.7; font-size: 1.2rem;">Real proof, real results. Tap any section to see more.</p>
+    </div>
+
+    <div class="category-container" id="cat1">
+        <div class="category-box" onclick="this.parentElement.classList.toggle('open')">
+            <div class="slideshow-window" data-interval="5000">
+                <img src="imgs/gallery/hauls/haul1.jpg" class="slide active">
+                <img src="imgs/gallery/hauls/haul2.jpg" class="slide">
+                <img src="imgs/gallery/hauls/haul3.jpg" class="slide">
+				<img src="imgs/gallery/hauls/haul4.jpg" class="slide">
+				<img src="imgs/gallery/hauls/haul5.jpg" class="slide">
+				<img src="imgs/gallery/hauls/haul6.jpg" class="slide">
+				<img src="imgs/gallery/hauls/haul7.jpg" class="slide">
+				<img src="imgs/gallery/hauls/haul8.jpg" class="slide">
+				
+				
+            </div>
+            <div class="category-info">
+                <h2>Recent Shopping Hauls 🛒</h2>
+                <p>New arrivals freshly procured from top Indian stores like Myntra and Ajio.</p>
+                <div class="view-indicator">Click to View All Photos →</div>
+            </div>
+        </div>
+        <div class="grid-hidden">
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul1.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul2.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul3.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul4.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul5.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul6.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul7.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/hauls/haul8.jpg"></div>
+        </div>
+    </div>
+
+    <div class="category-container" id="cat2">
+        <div class="category-box" onclick="this.parentElement.classList.toggle('open')">
+            <div class="slideshow-window" data-interval="5000">
+                <img src="imgs/gallery/pack/packing1.jpg" class="slide active">
+                <img src="imgs/gallery/pack/packing2.jpg" class="slide">
+                <img src="imgs/gallery/pack/packing3.jpg" class="slide">
+            </div>
+            <div class="category-info">
+                <h2>Rock-Solid Packing 🛡️</h2>
+                <p>Detailed view of our protective bubble wrap and fragile care for global travel.</p>
+                <div class="view-indicator">Click to View All Photos →</div>
+            </div>
+        </div>
+        <div class="grid-hidden">
+            <div class="grid-item"><img src="imgs/gallery/pack/packing1.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/pack/packing2.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/pack/packing3.jpg"></div>
+        </div>
+    </div>
+
+    <div class="category-container" id="cat3">
+        <div class="category-box" onclick="this.parentElement.classList.toggle('open')">
+            <div class="slideshow-window" data-interval="5000">
+                <img src="imgs/gallery/cons/cons1.jpg" class="slide active">
+                <img src="imgs/gallery/cons/cons2.jpg" class="slide">
+            </div>
+            <div class="category-info">
+                <h2>Consolidation Magic 📦</h2>
+                <p>Showcasing how we combine multiple orders into one secure box to save you shipping costs.</p>
+                <div class="view-indicator">Click to View All Photos →</div>
+            </div>
+        </div>
+        <div class="grid-hidden">
+            <div class="grid-item"><img src="imgs/gallery/cons/cons1.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/cons/cons2.jpg"></div>
+        </div>
+    </div>
+
+    <div class="category-container" id="cat4">
+        <div class="category-box" onclick="this.parentElement.classList.toggle('open')">
+            <div class="slideshow-window" data-interval="5000">
+                <img src="imgs/gallery/delivered/delivery1.jpg" class="slide active">
+                <img src="imgs/gallery/delivered/delivery2.jpg" class="slide">
+            </div>
+            <div class="category-info">
+                <h2>User Received & Unboxed 🌎</h2>
+                <p>Real photos shared by our community after receiving their packages worldwide.</p>
+                <div class="view-indicator">Click to View Delivery Proof →</div>
+            </div>
+        </div>
+        <div class="grid-hidden">
+            <div class="grid-item"><img src="imgs/gallery/delivered/delivery1.jpg"></div>
+            <div class="grid-item"><img src="imgs/gallery/delivered/delivery2.jpg"></div>
+        </div>
+    </div>
+
+    <section class="review-section" id="reviews">
+        <div style="text-align: center;">
+            <h2 style="font-size: 2.5rem; margin: 0;">Verified Community Reviews 🧡</h2>
+            <p style="opacity: 0.6; margin-top: 10px;">Our track record on Reddit and beyond.</p>
+        </div>
+        
+        <div class="review-card">
+            <span class="user-meta">u/Kuma_2001 🌎</span>
+            <p>"I recently used u/iBackedoff to forward items... Shipping and delivery were impressively fast — I received my items within a week."</p>
+            <a href="https://www.reddit.com/r/internationalshopper/comments/1q2nexa/positive_review_for_uibackedoff/" target="_blank" style="color: var(--reddit); text-decoration: none; font-size: 0.8rem; font-weight: 800;">View Original Reddit Post →</a>
+        </div>
+
+        <div class="review-card">
+            <span class="user-meta">u/madbbish 🇵🇭</span>
+            <p>"I waited for exactly 10 days (India to Philippines)... After unboxing, all the items were COMPLETE and in BEST condition."</p>
+            <a href="https://www.reddit.com/r/internationalshopper/comments/1neck9h/best_decision_i_made_with_uibackedoff_positive/" target="_blank" style="color: var(--reddit); text-decoration: none; font-size: 0.8rem; font-weight: 800;">View Original Reddit Post →</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://www.reddit.com/r/internationalshopper/search/?q=iBackedoff" style="color: var(--accent); font-weight: 800; text-decoration: none;">Read more reviews on Reddit →</a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    IBOShipping © 2026 | Verified Proxy Service 🇮🇳
+</footer>
+
+<script>
+    // Theme Toggle
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+
+    // Automatic Slideshow Logic
+    document.querySelectorAll('.slideshow-window').forEach(window => {
+        let slides = window.querySelectorAll('.slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+    });
+</script>
+
+</body>
+</html>

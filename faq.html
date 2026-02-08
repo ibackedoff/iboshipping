@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ & Restrictions | IBOShipping ❓</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --bg: #0b0f1a; --card: #161b2c; --text: #f1f5f9;
+        --accent: #38bdf8; --nav-bg: rgba(11, 15, 26, 0.85);
+        --border: rgba(255, 255, 255, 0.08);
+        --danger: #ef4444;
+    }
+    .light-mode {
+        --bg: #f8fafc; --card: #ffffff; --text: #0f172a;
+        --accent: #0284c7; --nav-bg: rgba(248, 250, 252, 0.85);
+        --border: rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); padding-top: 100px; overflow-x: hidden; }
+    
+    /* --- Mobile-Friendly Navigation --- */
+    nav { 
+        position: fixed; top: 0; width: 100%; z-index: 1000; 
+        background: var(--nav-bg); backdrop-filter: blur(15px); 
+        padding: 1.2rem 5%; display: flex; justify-content: space-between; 
+        align-items: center; border-bottom: 1px solid var(--border); 
+    }
+    .logo { font-weight: 800; font-size: 1.6rem; color: var(--accent); text-decoration: none; }
+    
+    .nav-links { display: flex; align-items: center; gap: 15px; } 
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; white-space: nowrap; }
+    
+    #theme-toggle { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 15px; border-radius: 100px; cursor: pointer; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+    
+    .faq-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; margin-bottom: 20px; overflow: hidden; }
+    .faq-question { padding: 25px; cursor: pointer; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; }
+    .faq-answer { padding: 0 25px 25px; opacity: 0.8; line-height: 1.6; border-top: 1px solid var(--border); padding-top: 20px; }
+
+    .restriction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+    .restriction-item { background: rgba(239, 68, 68, 0.1); border: 1px solid var(--danger); padding: 15px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
+
+    footer { text-align: center; padding: 80px 5%; border-top: 1px solid var(--border); }
+
+    /* --- Global Mobile Optimization --- */
+    @media (max-width: 768px) {
+        body { padding-top: 80px; }
+        
+        /* Fixed Header Stacking */
+        nav { padding: 1rem 3%; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .logo { width: 100%; text-align: center; font-size: 1.3rem; margin-bottom: 5px; }
+        .nav-links { gap: 12px; justify-content: center; width: 100%; }
+        .nav-links a { font-size: 0.8rem; }
+        
+        .container { padding: 40px 15px; }
+        h1 { font-size: 2.2rem !important; text-align: center; }
+        
+        .faq-question { padding: 20px; font-size: 1rem; }
+        .faq-answer { padding: 20px; font-size: 0.95rem; }
+        
+        /* Ensure restriction items don't overflow */
+        .restriction-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .restriction-item { padding: 12px; font-size: 0.8rem; }
+    }
+
+    @media (max-width: 480px) {
+        .restriction-grid { grid-template-columns: 1fr; }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">IBOShipping 🇮🇳</a>
+    <div class="nav-links">
+        <a href="how-it-works.html">🗺️ Journey</a>
+        <a href="gallery.html">📸 Gallery</a>
+        <a href="pricing.html">💳 Pricing</a>
+        <a href="faq.html" style="color: var(--accent);">❓ FAQ</a>
+        <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+</nav>
+
+<div class="container">
+    <div style="text-align: center; margin-bottom: 80px;">
+        <h1 style="font-size: 3.5rem; margin-bottom: 10px;">Common Queries ❓</h1>
+        <p style="opacity: 0.7; font-size: 1.2rem;">Everything you need to know before shipping 🌎</p>
+    </div>
+
+    <div class="faq-card">
+        <div class="faq-question">What payment methods do you accept? 💸</div>
+        <div class="faq-answer">
+            <strong>Wise:</strong> Highly recommended for the best rates and lowest fees. <br>
+            <strong>Crypto:</strong> Accepted for global convenience. <br>
+            <strong>PayPal:</strong> Accepted, but please note that the buyer must bear the high transaction fees and currency conversion rates.
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <div class="faq-question">Can you ship liquid items or medicines? 🧴</div>
+        <div class="faq-answer">
+            <strong>Liquids:</strong> While officially restricted by many carriers, we can often ship non-flammable liquids or specific cosmetics at the **User's Own Risk**. <br><br>
+            <strong>Medicines:</strong> Certain over-the-counter or prescribed medicines are shippable depending on the destination. Please contact us with the specific product details first so we can verify.
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <div class="faq-question">Do you open my packages? 📦</div>
+        <div class="faq-answer">Yes. Every package is opened for two reasons: To provide you with **Free Photo Verification** and to ensure the contents comply with international shipping safety standards.</div>
+    </div>
+
+    <div class="faq-card">
+        <div class="faq-question">How long does shipping take? ✈️</div>
+        <div class="faq-answer">
+            <strong>Speed Post:</strong> 7-14 Days (Reliable & Popular). <br>
+            <strong>Private Courier (DPD/Others):</strong> 5-10 Days (Premium). <br>
+            <strong>Normal Post:</strong> 3-4 Weeks+ (Unreliable/Slow).
+        </div>
+    </div>
+
+    <div style="margin-top: 80px; padding: 50px; background: var(--card); border-radius: 32px; border: 1px solid var(--border);">
+        <h2 style="color: var(--danger); margin-top: 0;">Restricted Items (India Post Guidelines) 🚫</h2>
+        <p style="opacity: 0.7;">Based on official regulations, we cannot ship the following through standard channels:</p>
+        
+        <div class="restriction-grid">
+            <div class="restriction-item">🔥 Flammable Liquids</div>
+            <div class="restriction-item">💨 Compressed Gases</div>
+            <div class="restriction-item">🔋 Lithium Batteries</div>
+            <div class="restriction-item">☣️ Toxic/Infectious</div>
+            <div class="restriction-item">🧪 Oxidizing Agents</div>
+            <div class="restriction-item">💰 Currency/Cash</div>
+            <div class="restriction-item">🥥 Dry Coconut</div>
+            <div class="restriction-item">🐾 Live Creatures</div>
+        </div>
+        <p style="margin-top: 25px; font-style: italic; opacity: 0.6; font-size: 0.9rem;">*Electronics with inbuilt batteries or specific liquids require special courier routes. Contact us for a quote.</p>
+    </div>
+</div>
+
+<footer>
+    <span style="font-weight: 800; color: var(--accent); font-size: 1.2rem;">IBOShipping 🇮🇳</span>
+    <p style="opacity: 0.5; margin-top: 20px;">Safe. Transparent. Global. 🌎</p>
+</footer>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+</script>
+
+</body>
+</html>

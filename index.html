@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBOShipping | 🇮🇳 Indian Proxy & Global Logistics 🌎</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0f1a; --card: #161b2c; --text: #f1f5f9;
+            --accent: #38bdf8; --nav-bg: rgba(11, 15, 26, 0.85);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        .light-mode {
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a;
+            --accent: #0284c7; --nav-bg: rgba(248, 250, 252, 0.85);
+            --border: rgba(0, 0, 0, 0.08);
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { 
+            margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); color: var(--text); overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); backdrop-filter: blur(15px);
+            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--accent); text-decoration: none; }
+        
+        .nav-links { display: flex; align-items: center; gap: 20px; }
+        .nav-links a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.85rem; opacity: 0.8; }
+        .nav-links a:hover { color: var(--accent); opacity: 1; }
+
+        #theme-toggle {
+            background: var(--card); border: 1px solid var(--border);
+            color: var(--text); padding: 8px 15px; border-radius: 100px;
+            cursor: pointer; font-size: 1rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 100px 5% 80px; text-align: center;
+            background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent);
+        }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; margin: 0; line-height: 1.1; letter-spacing: -1.5px; }
+        .hero p { font-size: 1.2rem; opacity: 0.7; max-width: 650px; margin: 25px auto 40px; line-height: 1.6; }
+
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn { 
+            padding: 16px 35px; border-radius: 14px; font-weight: 700; 
+            text-decoration: none; font-size: 1rem; display: flex; align-items: center; gap: 10px;
+        }
+        .btn-primary { background: var(--accent); color: #0b0f1a; }
+        .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+        .btn:hover { transform: translateY(-3px); }
+
+        /* --- Trust Stats --- */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px; max-width: 1100px; margin: -40px auto 60px;
+            background: var(--card); padding: 30px; border-radius: 24px;
+            border: 1px solid var(--border); text-align: center;
+        }
+        .stat-item h3 { font-size: 2rem; color: var(--accent); margin: 0; }
+        .stat-item p { font-size: 0.8rem; font-weight: 700; opacity: 0.5; text-transform: uppercase; margin: 5px 0 0; }
+
+        /* --- Feature Grid --- */
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; font-weight: 800; }
+
+        .features { padding: 40px 5% 100px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .f-card { 
+            background: var(--card); padding: 40px; border-radius: 28px; 
+            border: 1px solid var(--border); transition: 0.4s;
+        }
+        .f-card:hover { border-color: var(--accent); transform: translateY(-10px); }
+        .f-card .icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
+        .f-card h3 { color: var(--accent); margin: 0 0 12px; font-size: 1.4rem; }
+        .f-card p { opacity: 0.7; font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- Marquee --- */
+        .marquee { padding: 40px 0; background: rgba(0,0,0,0.02); overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .marquee-content { display: inline-block; animation: scroll 40s linear infinite; }
+        .marquee-content span { font-size: 1rem; font-weight: 800; margin: 0 30px; opacity: 0.3; letter-spacing: 2px; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 3%; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .logo { width: 100%; text-align: center; margin-bottom: 5px; }
+            .nav-links { gap: 12px; justify-content: center; width: 100%; }
+            .nav-links a { font-size: 0.75rem; }
+            .hero { padding-top: 60px; }
+            .hero h1 { font-size: 2.2rem; }
+            .stats-bar { margin: 20px 5%; grid-template-columns: 1fr 1fr; }
+        }
+
+        footer { text-align: center; padding: 60px 5%; border-top: 1px solid var(--border); margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">IBOShipping 🇮🇳</a>
+    <div class="nav-links">
+        <a href="how-it-works.html">Journey</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="faq.html">FAQ</a>
+        <a href="pricing.html">Pricing</a>
+        <button id="theme-toggle" onclick="toggleTheme()">🌓</button>
+    </div>
+</nav>
+
+<section class="hero">
+    <h1>Your Personal 🇮🇳 Gateway <br>to the 🌎 World.</h1>
+    <p>Shop authentic Indian stores with ease. We handle the local purchasing, strict quality inspections, and global logistics for you.</p>
+    <div class="btn-group">
+        <a href="order.html" class="btn btn-primary">Start Order 🚀</a>
+        <a href="how-it-works.html" class="btn btn-secondary">How it Works 📦</a>
+    </div>
+</section>
+
+<div class="stats-bar">
+    <div class="stat-item"><h3>50+</h3><p>Packages Sent</p></div>
+    <div class="stat-item"><h3>100%</h3><p>Success Rate</p></div>
+    <div class="stat-item"><h3>15+</h3><p>Countries Served</p></div>
+    <div class="stat-item"><h3>24/7</h3><p>Support</p></div>
+</div>
+
+<div class="marquee">
+    <div class="marquee-content">
+        <span>AMAZON INDIA</span> <span>MYNTRA</span> <span>AJIO</span> <span>TATA CLIQ</span> <span>FLIPKART</span> <span>NYKAA</span> <span>FABINDIA</span> <span>JIO MART</span>
+        <span>AMAZON INDIA</span> <span>MYNTRA</span> <span>AJIO</span> <span>TATA CLIQ</span> <span>FLIPKART</span> <span>NYKAA</span> <span>FABINDIA</span> <span>JIO MART</span>
+    </div>
+</div>
+
+<section class="features">
+    <div class="f-card">
+        <span class="icon">📦</span>
+        <h3>Smart Consolidation</h3>
+        <p>Buying from multiple stores? We combine your items into one secure package, saving you up to 60% on international shipping fees.</p>
+    </div>
+    <div class="f-card">
+        <span class="icon">🔍</span>
+        <h3>Detailed Inspection</h3>
+        <p>We unbox and inspect every item. You receive high-quality photos to verify the condition and color before it leaves India.</p>
+    </div>
+    <div class="f-card">
+        <span class="icon">🏘️</span>
+        <h3>Local Sourcing</h3>
+        <p>Can't find it online? We can visit local Indian markets to source authentic spices, ethnic wear, and unique handicrafts, etc just for you.</p>
+    </div>
+</section>
+
+<section style="text-align: center; padding: 80px 5%; background: var(--card); border-top: 1px solid var(--border);">
+    <h2 style="font-size: 2.2rem; margin-bottom: 15px;">Global Reach 🌎</h2>
+    <p style="opacity: 0.7; margin-bottom: 40px;">Shipping often to the USA, UK, Canada, Australia, Philippines, and beyond.</p>
+    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; font-size: 2rem; opacity: 0.5;">
+        <span>🇺🇸</span> <span>🇬🇧</span> <span>🇨🇦</span> <span>🇦🇺</span> <span>🇵🇭</span> <span>🇪🇺</span>
+    </div>
+</section>
+
+<footer>
+    <span style="font-weight: 800; color: var(--accent); margin-bottom: 20px; display: block;">IBOShipping 🇮🇳</span>
+    <div style="margin-bottom: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <a href="how-it-works.html" style="color: inherit; text-decoration: none; font-size: 0.8rem; font-weight: 600;">Process</a>
+        <a href="pricing.html" style="color: inherit; text-decoration: none; font-size: 0.8rem; font-weight: 600;">Pricing</a>
+        <a href="gallery.html" style="color: inherit; text-decoration: none; font-size: 0.8rem; font-weight: 600;">Gallery</a>
+        <a href="faq.html" style="color: inherit; text-decoration: none; font-size: 0.8rem; font-weight: 600;">FAQ</a>
+    </div>
+    <p style="opacity: 0.5; font-size: 0.75rem;">© 2026 IBOShipping. Verified Reddit Proxy & Forwarder. 🌎</p>
+</footer>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+</script>
+
+</body>
+</html>
